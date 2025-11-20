@@ -15,7 +15,7 @@ jobs:
       - name: Setup ROS 2 apt repo
         run: |
           sudo apt update
-          sudo apt install -y software-properties-common curl gnupg lsb-release rsync
+          sudo apt install -y software-properties-common curl gnupg lsb-release
           sudo add-apt-repository universe
           sudo apt update
           curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key | \
@@ -38,8 +38,9 @@ jobs:
 
       - name: Build workspace
         run: |
+          rm -rf ros2_ws
           mkdir -p ros2_ws/src
-          rsync -av --exclude=".github" ./ ros2_ws/src/kotoshbot/
+          cp -r kotoshbot_base ros2_ws/src/
           cd ros2_ws
           source /opt/ros/humble/setup.bash
           rosdep install --from-paths src --ignore-src -r -y
