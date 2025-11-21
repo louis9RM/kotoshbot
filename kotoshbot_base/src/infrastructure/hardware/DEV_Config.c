@@ -1,7 +1,7 @@
 /*****************************************************************************
 
 ******************************************************************************/
-#include "lidarbot_base/infrastructure/hardware/DEV_Config.h"
+#include "kotoshbot_base/infrastructure/hardware/DEV_Config.h"
 #include <unistd.h>
 #include <fcntl.h>
 
