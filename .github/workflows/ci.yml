@@ -1,54 +1,28 @@
-name: CI - kotoshbot
+<?xml version="1.0"?>
+<package format="3">
+  <name>kotoshbot_base</name>
+  <version>0.0.1</version>
+  <description>Kotosh robot base package.</description>
 
-on:
-  push:
-  pull_request:
+  <maintainer email="ever@example.com">Ever</maintainer>
+  <license>Apache-2.0</license>
 
-jobs:
-  build:
-    runs-on: ubuntu-22.04
+  <!-- Build system -->
+  <buildtool_depend>ament_cmake</buildtool_depend>
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+  <!-- Dependencias ROS2 reales que usas en CMake -->
+  <depend>controller_manager</depend>
+  <depend>hardware_interface</depend>
+  <depend>pluginlib</depend>
+  <depend>rclcpp</depend>
+  <depend>rclcpp_lifecycle</depend>
 
-      - name: Setup ROS 2 apt repo
-        run: |
-          sudo apt update
-          sudo apt install -y software-properties-common curl gnupg lsb-release
-          sudo add-apt-repository universe
-          sudo apt update
-          curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key | \
-            sudo tee /usr/share/keyrings/ros-archive-keyring.gpg > /dev/null
-          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" | \
-            sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
-          sudo apt update
-        shell: bash
+  <!-- Test dependencies -->
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_cmake_gtest</test_depend>
+  <test_depend>ament_lint_common</test_depend>
 
-      - name: Install ROS 2 Humble (ros-base) + tools
-        run: |
-          sudo apt install -y \
-            ros-humble-ros-base \
-            python3-colcon-common-extensions \
-            python3-rosdep \
-            python3-vcstool
-          sudo rosdep init || true
-          rosdep update
-        shell: bash
-
-      - name: Install ros2_control dependencies
-        run: sudo apt install -y \
-          ros-humble-ros2-control \
-          ros-humble-ros2-controllers
-        shell: bash
-
-      - name: Build workspace
-        run: |
-          rm -rf ros2_ws
-          mkdir -p ros2_ws/src
-          cp -r kotoshbot_base ros2_ws/src/
-          cd ros2_ws
-          source /opt/ros/humble/setup.bash
-          rosdep install --from-paths src --ignore-src -r -y
-          colcon build --symlink-install
-        shell: bash
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
