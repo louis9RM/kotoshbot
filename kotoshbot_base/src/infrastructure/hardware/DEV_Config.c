@@ -1,13 +1,5 @@
 /*****************************************************************************
-* | File      	:   DEV_Config.c
-* | Author      :   Waveshare team
-* | Function    :   Hardware underlying interface
-* | Info        :
-*----------------
-* |	This version:   V2.0
-* | Date        :   2019-07-08
-* | Info        :   Basic version
-*
+
 ******************************************************************************/
 #include "lidarbot_base/infrastructure/hardware/DEV_Config.h"
 #include <unistd.h>

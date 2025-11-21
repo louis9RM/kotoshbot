@@ -9,25 +9,24 @@ find_package(rclcpp REQUIRED)
 find_package(rclcpp_lifecycle REQUIRED)
 find_package(std_srvs REQUIRED)
 
-# Incluye todas las cabeceras del paquete
-include_directories(include)
-
-# 1) Crear librería con tu código de infraestructura/hardware
-add_library(kotoshbot_hardware SHARED 
-          src/infrastructure/hardware/DEV_Config.c
+# Crear la librería (infraestructura/hardware)
+add_library(kotoshbot_hardware SHARED
+    src/infrastructure/hardware/DEV_Config.c
 )
+
+# Headers solo visibles para la librería (hexagonal)
 target_include_directories(kotoshbot_hardware PRIVATE include)
 
-
-
-
-
-add_executable(kotoshbot_node src/main.cpp)
-ament_target_dependencies(kotoshbot_node rclcpp)
-
-install(TARGETS
-  kotoshbot_node
+# Instalar la librería
+install(
+  TARGETS kotoshbot_hardware
   DESTINATION lib/${PROJECT_NAME}
+)
+
+# Instalar headers
+install(
+  DIRECTORY include/
+  DESTINATION include
 )
 
 ament_package()
