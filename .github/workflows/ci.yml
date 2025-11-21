@@ -36,12 +36,6 @@ jobs:
           rosdep update
         shell: bash
 
-      - name: Install ros2_control dependencies
-        run: sudo apt install -y \
-          ros-humble-ros2-control \
-          ros-humble-ros2-controllers
-        shell: bash
-
       - name: Build workspace
         run: |
           rm -rf ros2_ws
