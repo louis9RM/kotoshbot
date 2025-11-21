@@ -10,9 +10,9 @@ find_package(rclcpp REQUIRED)
 find_package(std_srvs REQUIRED)
 
 # Crear la librería (infraestructura/hardware)
-add_library(kotoshbot_hardware SHARED
-    src/infrastructure/hardware/DEV_Config.c
-)
+#add_library(kotoshbot_hardware SHARED
+  #  src/infrastructure/hardware/DEV_Config.c
+#)
 
 # Headers solo visibles para la librería (hexagonal)
 target_include_directories(kotoshbot_hardware PRIVATE include)
