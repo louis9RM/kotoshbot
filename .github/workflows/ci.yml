@@ -38,8 +38,8 @@ jobs:
 
       - name: Install ros2_control dependencies
         run: sudo apt install -y \
-          ros-humble-ros2control \
-          ros-humble-ros2controllers
+          ros-humble-ros2-control \
+          ros-humble-ros2-controllers
         shell: bash
 
       - name: Build workspace
