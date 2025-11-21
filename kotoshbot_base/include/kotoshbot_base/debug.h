@@ -1,14 +1,4 @@
-/*****************************************************************************
-* | File      	:	Debug.h
-* | Author      :   El Creador
-* | Function    :	debug with printf
-* | Info        :
-*----------------
-* |	This version:   V1.0
-* | Date        :   2025
-* | Info        :   Basic version
-*
-******************************************************************************/
+
 #ifndef __DEBUG_H
 #define __DEBUG_H
 
