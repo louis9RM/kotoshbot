@@ -7,17 +7,19 @@
   <maintainer email="ever@example.com">Ever</maintainer>
   <license>Apache-2.0</license>
 
+  <!-- Build system -->
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <!-- Solo dependencias básicas -->
+  <!-- Dependencias mínimas -->
   <depend>rclcpp</depend>
   <depend>std_srvs</depend>
 
+  <!-- Dependencias para CI / quality -->
   <test_depend>ament_lint_auto</test_depend>
-  <test_depend>ament_cmake_gtest</test_depend>
   <test_depend>ament_lint_common</test_depend>
 
   <export>
     <build_type>ament_cmake</build_type>
   </export>
+
 </package>

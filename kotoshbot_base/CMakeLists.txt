@@ -1,32 +1,40 @@
 cmake_minimum_required(VERSION 3.8)
 project(kotoshbot_base)
 
-# Dependencias necesarias
-find_package(ament_cmake REQUIRED)
-#find_package(hardware_interface REQUIRED)
-#find_package(pluginlib REQUIRED)
-find_package(rclcpp REQUIRED)
+# Reglas de compilación (warning pero permitir C++)
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 17)
+endif()
 
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
 find_package(std_srvs REQUIRED)
 
-# Crear la librería (infraestructura/hardware)
-add_library(kotoshbot_hardware SHARED
-    src/infrastructure/hardware/DEV_Config.c
+# ---- BUILD ----
+add_library(${PROJECT_NAME} SHARED
+  src/application/
+  src/domain/
+  src/infrastructure/hardware/
 )
 
-# Headers solo visibles para la librería (hexagonal)
-target_include_directories(kotoshbot_hardware PRIVATE include)
-
-# Instalar la librería
-install(
-  TARGETS kotoshbot_hardware
-  DESTINATION lib/${PROJECT_NAME}
+target_include_directories(${PROJECT_NAME} PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
 )
-target_link_libraries(kotoshbot_hardware wiringPi)
-# Instalar headers
+
+ament_target_dependencies(${PROJECT_NAME}
+  rclcpp
+  std_srvs
+)
+
+# ---- INSTALL ----
 install(
   DIRECTORY include/
   DESTINATION include
 )
+
+# ---- EXPORT ----
+ament_export_dependencies(rclcpp std_srvs)
+ament_export_include_directories(include)
 
 ament_package()
